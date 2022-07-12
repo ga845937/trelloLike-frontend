@@ -3,9 +3,9 @@ import React, { useEffect } from "react";
 import TaskComponent from "./task-component";
 
 const AddTaskComponent = ({
-  taskTotal,
   setTaskTotal,
   taskName,
+  taskTotal,
   setTaskName,
 }) => {
   const handleTaskName = (e) => {
@@ -19,7 +19,6 @@ const AddTaskComponent = ({
         <TaskComponent
           taskName={taskName}
           id={uuidv4()}
-          taskTotal={taskTotal}
           setTaskTotal={setTaskTotal}
         />
       );
@@ -28,6 +27,20 @@ const AddTaskComponent = ({
       setTaskName("");
     }
   };
+
+  // useEffect(() => {
+  //   const localData = localStorage.getItem("task") || "";
+  //   if (localData) {
+  //     setTaskTotal(JSON.parse(localData));
+  //     console.log(JSON.parse(localStorage.getItem("task")));
+  //   }
+  // }, []);
+
+  useEffect(() => {
+    let data = taskTotal.map((item) => item.props.taskName);
+    localStorage.setItem("task", JSON.stringify(data));
+    console.log(JSON.parse(localStorage.getItem("task")));
+  }, [taskTotal]);
 
   return (
     <div className="addTask">

@@ -4,7 +4,7 @@ import { fas } from "@fortawesome/free-solid-svg-icons";
 import { v4 as uuidv4 } from "uuid";
 import CardComponent from "./card-component";
 
-const TaskComponent = ({ taskName, id, setTaskTotal, taskTotal }) => {
+const TaskComponent = ({ taskName, id, setTaskTotal }) => {
   let [cardName, setCardName] = useState("");
   let [cardTotal, setCardTotal] = useState([]);
 
@@ -32,7 +32,7 @@ const TaskComponent = ({ taskName, id, setTaskTotal, taskTotal }) => {
           setCardTotal={setCardTotal}
         />
       );
-      // ...oldTasks:不知道有多少tasks array，用...展開全部
+      // ...oldCards:不知道有多少cards array，用...展開全部
       setCardTotal((oldCards) => [...oldCards, newCardComponent]);
       setCardName("");
     }

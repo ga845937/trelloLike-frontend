@@ -7,7 +7,9 @@ const CardComponent = ({ cardName, id, cardTotal, setCardTotal }) => {
   let [cardDetail, setCardDetail] = useState("");
 
   const handleDeleteCard = () => {
-    if (window.confirm(`Are you sure to delete Card「${cardName}」?`) == true) {
+    if (
+      window.confirm(`Are you sure to delete Card「${cardName}」?`) === true
+    ) {
       setCardTotal((cardTotal) => {
         return cardTotal.filter((item) => item.props.id !== id);
       });

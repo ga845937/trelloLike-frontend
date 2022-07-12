@@ -4,8 +4,7 @@ import AddTaskComponent from "./addTask-component";
 const HomeComponent = () => {
   let [taskName, setTaskName] = useState("");
   let [taskTotal, setTaskTotal] = useState([]);
-
-  // useEffect(() => {}, []);
+  // JSON.parse(localStorage.getItem("task"))
 
   return (
     <div className="main" style={{ minHeight: "90vh" }}>
