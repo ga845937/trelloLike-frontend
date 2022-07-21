@@ -4,7 +4,9 @@ import { fas } from "@fortawesome/free-solid-svg-icons";
 const NavComponent = () => {
   return (
     <nav>
-      <h1>Task Dashboard</h1>
+      <h1>
+        <a href="/">Task Dashboard</a>
+      </h1>
       <div className="search">
         <input type="text" />
         <button>

@@ -1,15 +1,19 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { fas } from "@fortawesome/free-solid-svg-icons";
-import { v4 as uuidv4 } from "uuid";
 import CardComponent from "./card-component";
+import { taskDelete, getToken } from "../service/add-service";
 
 const TaskComponent = ({ taskName, id, setTaskTotal }) => {
   let [cardName, setCardName] = useState("");
   let [cardTotal, setCardTotal] = useState([]);
 
-  const handleDeleteCard = () => {
-    if (window.confirm(`Are you sure to delete Task「${taskName}」?`) == true) {
+  const handleDeleteCard = async () => {
+    if (
+      window.confirm(`Are you sure to delete Task「${taskName}」?`) === true
+    ) {
+      const token = await getToken();
+      await taskDelete(id, token);
       setTaskTotal((taskTotal) => {
         return taskTotal.filter((item) => item.props.id !== id);
       });
@@ -21,13 +25,14 @@ const TaskComponent = ({ taskName, id, setTaskTotal }) => {
   };
 
   const handleAddCard = () => {
-    if (cardName == "") {
+    if (cardName === "") {
       window.alert("Please enter card name.");
     } else {
       const newCardComponent = (
         <CardComponent
           cardName={cardName}
-          id={uuidv4()}
+          id={id}
+          key={id}
           cardTotal={cardTotal}
           setCardTotal={setCardTotal}
         />
@@ -51,7 +56,7 @@ const TaskComponent = ({ taskName, id, setTaskTotal }) => {
         </p>
       </div>
 
-      <div className="cardDetail">{cardTotal}</div>
+      <div className="cards">{cardTotal}</div>
       <input
         onChange={handleCardName}
         name="cardName"
